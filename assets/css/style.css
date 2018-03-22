@@ -1,0 +1,36 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+.banner{
+    height: 75px;
+    width: 100%;
+    position: relative;
+    top:0;
+    left:0;
+    background: #333333;
+}
+
+.title{
+    text-align: center;
+    font-size: 1.75em;
+    color: aquamarine;
+}
+
+.tag {
+    background: rgb(73, 73, 240);
+    padding: 6px;
+    border-radius: 5px;
+    color: white;
+}
+
+.delete-symbol{
+    border:1px solid black;
+    border-radius: 50%;
+    font-size: .6em;
+
+    padding-bottom: 3px;
+    padding-right: 6px;
+    padding-left: 6px;
+}
