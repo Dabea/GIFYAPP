@@ -14,6 +14,7 @@ function generateTags(name){
 }
 
 function buildView(){
+    $('.btn-area').empty();
     for(let i = 0; i < tagCollection.length; i++){
         generateTags(tagCollection[i]);
     }
@@ -31,16 +32,33 @@ $('.banner').on('click', '.tag', function(event){
     }).then(function(data){
         $('.img-area').empty();
         for(let i = 0; i < data.data.length; i++){
-            $('.img-area').append(` <div class="img-container" ><img style="width:100%" data-loop="${data.data[i].images.original.url}" data-static="${data.data[i].images.original_static.url}" src='${data.data[i].images.original.url}'> <span> Rateing:${data.data[i].rating}</span</div>`);
+            $('.img-area').append(` <div class="img-container" ><img style="width:100%" data-islooping="false" data-loop="${data.data[i].images.original.url}" data-still="${data.data[i].images.original_still.url}" src='${data.data[i].images.original.url}'> <span> Rateing:${data.data[i].rating}</span</div>`);
+            console.log(data.data[i].images);
         }
+
     });
 });
 
-$('.banner').on('click', '.delete-symbol', function(event){
+$('.banner').on('click', '.delete-symbol', function(event) {
     event.stopImmediatePropagation();
     $(event.target).closest('.tag').remove();
 });
 
+$('.img-area').on('click', '.img-container', function(event) {
+    const $imgElement = $(event.target).closest('img');
+    const loopingStatus = ($(event.target).closest('img').attr('data-islooping') === 'true');
+    const loopUrl =  $(event.target).closest('img').data('loop');
+    const still = $(event.target).closest('img').data('still');
+    
+    if(loopingStatus) {
+        $(event.target).closest('img').attr('src', loopUrl );
+        $(event.target).closest('img').attr('data-islooping', 'false');
+    }else{
+       
+        $(event.target).closest('img').attr('src', still );
+        $(event.target).closest('img').attr('data-islooping', 'true');
+    }
 
+} )
 
 buildView();
